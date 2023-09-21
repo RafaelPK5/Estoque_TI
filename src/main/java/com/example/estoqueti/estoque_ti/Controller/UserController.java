@@ -34,9 +34,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO login){
         boolean valid = userService.verificarCredenciais(login.getNickName(), login.getSenha());
-        if(!valid){
+        if(valid == false){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha Incorreta! Tente novamente!");
+        }else{
+            return ResponseEntity.status(HttpStatus.OK).body("Acesso autorizado!");
         }
-        return ResponseEntity.status(HttpStatus.OK).body("Acesso autorizado!");
     }
 }

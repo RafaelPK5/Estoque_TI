@@ -23,15 +23,15 @@ public class UserService {
     }
 
     public boolean verificarCredenciais(String nickName, String senha) {
-
         Optional<Users> usuarioOptional = repository.findByNickName(nickName);
-
+    
         if (usuarioOptional.isPresent()) {
             Users user = usuarioOptional.get();
-            if (nickName == user.getNickName() || senha == user.getSenha()) {
+            if (nickName.equals(user.getNickName()) && senha.equals(user.getSenha())) {
                 return true;
             }
         }
         return false;
     }
+    
 }
